@@ -31,10 +31,15 @@ class OrderStatusProcessor implements ProcessorInterface
         /** @var User $user */
         $user = $this->security->getUser();
         if($user->getId() != $existingCommande->getBartender()->getId()){
-            return('pas ta table');
+            if($user->getId() != $existingCommande->getWaiter()->getId()){
+                return('pas ta table');
+            } else {
+                $role = $user->getRoles()[0];
+            }
         } else {
             $role = $user->getRoles()[0];
         }
+
         if ($data->getStatus() == "payé") {
             return ("commande deja payé");
         } else if ($data->getStatus() == "prête" && $role == "ROLE_SERVEUR") {
@@ -44,6 +49,8 @@ class OrderStatusProcessor implements ProcessorInterface
                 $data->eraseCredentials();
 
                 return $this->persistProcessor->process($data, $operation, $uriVariables, $context);;
+            } else {
+                return('mauvais changement de status');
             }
         } else if ($data->getStatus() == "en cours de préparation" && $role == "ROLE_BARMAN") {
             if ($data->getStatusTemp() == "prête") {
@@ -52,6 +59,8 @@ class OrderStatusProcessor implements ProcessorInterface
                 $data->eraseCredentials();
 
                 return $this->persistProcessor->process($data, $operation, $uriVariables, $context);;
+            } else {
+                return('mauvais changement de status');
             }
         }
     }
