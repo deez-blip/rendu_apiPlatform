@@ -7,6 +7,7 @@ use App\State\CanOrder;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Post;
+use App\State\UpdateBartenderProcessor;
 use Doctrine\DBAL\Types\Types;
 
 use ApiPlatform\Metadata\Patch;
@@ -30,10 +31,15 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ApiResource(
     operations: [
         new GetCollection(security: "is_granted('ROLE_USER')", securityMessage: 'You are not allowed to get users'),
-        new Post(security: "is_granted('ROLE_SERVEUR')", processor:CanOrder::class, securityMessage:'You are not allowed to take commande'),
-        new Get(security: "is_granted('ROLE_SERVEUR')", securityMessage: 'You are not allowed to get this user'),
-        // new Patch(security: "is_granted('ROLE_SERVEUR')", processor:OrderStatusProcessorWaiter::class, securityMessage: 'You are not allowed to edit this user'),
-        new Patch(security: "is_granted('ROLE_BARMAN') or is_granted('ROLE_SERVEUR')", processor:OrderStatusProcessor::class, securityMessage: 'You are not allowed to edit this user')
+        new Post(security: "is_granted('ROLE_SERVEUR')", processor: CanOrder::class, securityMessage: 'You are not allowed to take commande'),
+        new Get(security: "is_granted('ROLE_SERVEUR') or is_granted('ROLE_BARMAN')", securityMessage: 'You are not allowed to get this user'),
+        new Patch(security: "is_granted('ROLE_BARMAN') or is_granted('ROLE_SERVEUR')", processor: OrderStatusProcessor::class, securityMessage: 'You are not allowed to edit this user'),
+        new Put(
+            uriTemplate: '/commandes/{id}/update-bartender',
+            security: "is_granted('ROLE_BARMAN')",
+            name: 'update_bartender',
+            processor: UpdateBartenderProcessor::class
+        )
     ],
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
@@ -71,7 +77,7 @@ class Commande
     private ?User $bartender = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $status = null;
 
     #[Groups(['write'])]
@@ -81,6 +87,7 @@ class Commande
     {
         $this->creationDate = new \DateTime();
         $this->boissons = new ArrayCollection();
+        $this->status = 'en préparation'; // Définir le statut par défaut à "en préparation"
     }
 
     public function getId(): ?int
@@ -110,11 +117,9 @@ class Commande
 
     public function addBoisson(Boisson $boisson): static
     {
-        // if (!$this->boissons->contains($boisson)) {
-        //     $this->boissons->add($boisson);
-        // }
-
-        $this->boissons->add($boisson);
+        if (!$this->boissons->contains($boisson)) {
+            $this->boissons->add($boisson);
+        }
 
         return $this;
     }
@@ -186,12 +191,8 @@ class Commande
         return $this;
     }
 
-        /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
         $this->statusTemp = null;
     }
 }

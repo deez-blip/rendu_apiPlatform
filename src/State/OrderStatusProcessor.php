@@ -52,7 +52,7 @@ class OrderStatusProcessor implements ProcessorInterface
             } else {
                 return('mauvais changement de status');
             }
-        } else if ($data->getStatus() == "en cours de préparation" && $role == "ROLE_BARMAN") {
+        } else if ($data->getStatus() == "en préparation" && $role == "ROLE_BARMAN") {
             if ($data->getStatusTemp() == "prête") {
 
                 $data->setStatus($data->getStatusTemp());
