@@ -2,46 +2,84 @@
 
 namespace App\Entity;
 
+use App\Entity\Boisson;
+use App\State\CanOrder;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
+
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
+use App\State\OrderStatusProcessor;
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CommandeRepository;
+use ApiPlatform\Metadata\GetCollection;
+
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-
-use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
-#[ApiResource()]
+#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'status' => 'exact'])]
+#[ApiFilter(DateFilter::class, properties: ['creationDate' => DateFilter::EXCLUDE_NULL])]
+#[ApiResource(
+    operations: [
+        new GetCollection(security: "is_granted('ROLE_USER')", securityMessage: 'You are not allowed to get users'),
+        new Post(security: "is_granted('ROLE_SERVEUR')", processor:CanOrder::class, securityMessage:'You are not allowed to take commande'),
+        new Get(security: "is_granted('ROLE_SERVEUR')", securityMessage: 'You are not allowed to get this user'),
+        // new Patch(security: "is_granted('ROLE_SERVEUR')", processor:OrderStatusProcessorWaiter::class, securityMessage: 'You are not allowed to edit this user'),
+        new Patch(security: "is_granted('ROLE_BARMAN') or is_granted('ROLE_SERVEUR')", processor:OrderStatusProcessor::class, securityMessage: 'You are not allowed to edit this user')
+    ],
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+    forceEager: false
+)]
 class Commande
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['read'])]
     private ?\DateTimeInterface $creationDate = null;
 
     /**
      * @var Collection<int, Boisson>
      */
     #[ORM\ManyToMany(targetEntity: Boisson::class, inversedBy: 'commandes')]
+    #[Groups(['read', 'write'])]
     private Collection $boissons;
 
     #[ORM\Column]
+    #[Groups(['read', 'write'])]
     private ?int $tableNumber = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[Groups(['read', 'write'])]
     private ?User $waiter = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[Groups(['read', 'write'])]
     private ?User $bartender = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read'])]
     private ?string $status = null;
+
+    #[Groups(['write'])]
+    private ?string $statusTemp = null;
 
     public function __construct()
     {
+        $this->creationDate = new \DateTime();
         $this->boissons = new ArrayCollection();
     }
 
@@ -72,9 +110,11 @@ class Commande
 
     public function addBoisson(Boisson $boisson): static
     {
-        if (!$this->boissons->contains($boisson)) {
-            $this->boissons->add($boisson);
-        }
+        // if (!$this->boissons->contains($boisson)) {
+        //     $this->boissons->add($boisson);
+        // }
+
+        $this->boissons->add($boisson);
 
         return $this;
     }
@@ -132,5 +172,26 @@ class Commande
         $this->status = $status;
 
         return $this;
+    }
+
+    public function getStatusTemp(): string
+    {
+        return $this->statusTemp;
+    }
+
+    public function setStatusTemp(string $statusTemp): static
+    {
+        $this->statusTemp = $statusTemp;
+
+        return $this;
+    }
+
+        /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        $this->statusTemp = null;
     }
 }

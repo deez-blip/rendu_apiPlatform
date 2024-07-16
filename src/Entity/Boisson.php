@@ -28,6 +28,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
     ],
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
+    forceEager: false
 )]
 class Boisson
 {
@@ -103,7 +104,7 @@ class Boisson
         }
 
         // set the owning side of the relation if necessary
-        if ($media !== null && $media->setBoisson() !== $this) {
+        if ($media !== null && $media->getBoisson() !== $this) {
             $media->setBoisson($this);
         }
 
