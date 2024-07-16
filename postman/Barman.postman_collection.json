@@ -1,0 +1,411 @@
+{
+	"info": {
+		"_postman_id": "00418ad5-eb64-4659-a480-2ee76eac612b",
+		"name": "Rendu cours IIM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36986258"
+	},
+	"item": [
+		{
+			"name": "get commande en preparation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjExNDA4NjAsImV4cCI6MTcyMTE0NDQ2MCwicm9sZXMiOlsiUk9MRV9CQVJNQU4iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJiYXJtYW4ifQ.ciLqxVRmOhZOGVeeq1k15MAvDFRo68uj_jmw7tZc9Y4AE_H1hfE-6k19COtUsGLvjRh4QZGIscgJ9a5z1H4OLHxbD3oAj8hb5BWaf6a_8iVfPAK4PXsxa4UoLraK5cbXik_vBtin8Xtsatcm9c9GD7yPT7XDdn3JS9skGAJMRjSK1jFjQTINMBqUjjqBb4lA73QOutEGy27cRaxvxozDIEO6KJGwt0iHEL9J6gUHYT6QtGlBc-acTNHB57EMXVmB9XnZekJZm2yTJLDAOJm-OonHvI4QpHfDXgo55o1u9_OmcJRPim8qPd9vjflMOuTd4hKvf7FMUwJUQpH_dQfjNA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"creationDate\": \"2024-07-16T12:56:10.324Z\",\r\n  \"boissons\": [\r\n    \"api/boissons/1\"\r\n  ],\r\n  \"tableNumber\": 1,\r\n  \"waiter\": \"api/users/1\",\r\n  \"bartender\": \"api/users/1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/commandes?status=en préparation",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"commandes"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "en préparation"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get commande details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjExNDA4NjAsImV4cCI6MTcyMTE0NDQ2MCwicm9sZXMiOlsiUk9MRV9CQVJNQU4iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJiYXJtYW4ifQ.ciLqxVRmOhZOGVeeq1k15MAvDFRo68uj_jmw7tZc9Y4AE_H1hfE-6k19COtUsGLvjRh4QZGIscgJ9a5z1H4OLHxbD3oAj8hb5BWaf6a_8iVfPAK4PXsxa4UoLraK5cbXik_vBtin8Xtsatcm9c9GD7yPT7XDdn3JS9skGAJMRjSK1jFjQTINMBqUjjqBb4lA73QOutEGy27cRaxvxozDIEO6KJGwt0iHEL9J6gUHYT6QtGlBc-acTNHB57EMXVmB9XnZekJZm2yTJLDAOJm-OonHvI4QpHfDXgo55o1u9_OmcJRPim8qPd9vjflMOuTd4hKvf7FMUwJUQpH_dQfjNA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"creationDate\": \"2024-07-16T12:56:10.324Z\",\r\n  \"boissons\": [\r\n    \"api/boissons/1\"\r\n  ],\r\n  \"tableNumber\": 1,\r\n  \"waiter\": \"api/users/1\",\r\n  \"bartender\": \"api/users/1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/commandes?status=en préparation",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"commandes"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "en préparation"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mise à jour d'une commande pour que le barman se l'attribut",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjExNDQ0ODcsImV4cCI6MTcyMTE0ODA4Nywicm9sZXMiOlsiUk9MRV9CQVJNQU4iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJiYXJtYW4ifQ.X8eXjAjytysQMfKiJivjH2vTWRwgigrgsE8NqhfBVB1vanNi_NNkIbdr2FHXF2N7cCTozYbepy2CJS100kVZ_IffEm7SuKbDIdYw6CZPaj28bd6uK3npMUGzGUofzEDWsGrZ9f_pn-t8lAw92pi6RUd1aCHGwzv4CfXyBsM38qS3WvCMLehiXSVJslapzuVvDKbG3pG3psZX-f4xu9LaAFvbujAkQdDzrHNChpUXAwkyFcyAFqUBj8wlZ2vo9yCibEYEJxx3DbdfDcAL1tvzhYRNKQnh-djPOLx1QarevM3Vnfd-7wu-dmHjcJbwJLUupvQPHVcRVfkIlgnB_-Zg5A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/merge-patch+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"statusTemp\": \"prête\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/commandes/7",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"commandes",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mise à jour d'une commande vers le statut \"prête\"",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjExNDQ0ODcsImV4cCI6MTcyMTE0ODA4Nywicm9sZXMiOlsiUk9MRV9CQVJNQU4iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJiYXJtYW4ifQ.X8eXjAjytysQMfKiJivjH2vTWRwgigrgsE8NqhfBVB1vanNi_NNkIbdr2FHXF2N7cCTozYbepy2CJS100kVZ_IffEm7SuKbDIdYw6CZPaj28bd6uK3npMUGzGUofzEDWsGrZ9f_pn-t8lAw92pi6RUd1aCHGwzv4CfXyBsM38qS3WvCMLehiXSVJslapzuVvDKbG3pG3psZX-f4xu9LaAFvbujAkQdDzrHNChpUXAwkyFcyAFqUBj8wlZ2vo9yCibEYEJxx3DbdfDcAL1tvzhYRNKQnh-djPOLx1QarevM3Vnfd-7wu-dmHjcJbwJLUupvQPHVcRVfkIlgnB_-Zg5A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/merge-patch+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"statusTemp\": \"prête\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/commandes/7",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"commandes",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post boissons",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjExMzQzNTMsImV4cCI6MTcyMTEzNzk1Mywicm9sZXMiOlsiUk9MRV9CQVJNQU4iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJiYXJtYW4ifQ.Qfdy0-TyUDSZOlIVIr_pxPw-UDGOYYf7pOBfvLt3ZnV2Nwmog6zRB_JpIf01owGGCQBKKh9nea6Vib_OoWVXrKQkmauV5wjX71VlkpO7GZ1U4fz3Egc1tantgnpoAZBRL7zzJOekdQQk8eBjSR7HBC_yEOo8WILs1_t8Fe_A-Z6-s1ooqB4s6mCGlsBEtNBty25e26arlgKZrjJ_sA2sW_fTcaxx5ZpZuA02r_6at8_6R24wDa6k-zbPaugrb8iBx9ENr5Z5MzqOCjJyLhhbTE5VfiiqE7PWlbefCyNoSQ5F5KvTY_woNuqzl-gj5UB-Uq1TZNZ8sdihqlH7z1p0Dw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"coca\",\r\n  \"price\": 10,\r\n  \"picture\": \"api/media/11\",\r\n  \"commandes\": [\r\n    \"api/commandes/1\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/boissons",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"boissons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mise à jour d'une boisson",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjEwNTI1MDMsImV4cCI6MTcyMTA1NjEwMywicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSIsImZpcnN0bmFtZSI6Ikd1aWxsYXVtZSJ9.hnxnVXth30DqHV2VObCYOe28X08vKdiq4p7KfkR0bsQu15AX8aY8mPlZkSVqlONlkWlqWX-s1hGVHIOS68igHemDWhV2SMlP6CtzfuhjdN6Vb9_2jhiQvqnra2RB4Zs-R7y2Jd245UkLBOgLu3MQm2nK8utSXvTCrT1tEIxc6Dk9ugssCz8GGLAK6ln6LVi3h2ziGCzmwu_SyGUYa3lN_DxH1S1UxJUACk_DmnpiAuWxy7WyC2M5TQy0IUyYqS5EjzsacyjR3bpQdEFJBUjefOZxjAB4uuNCZrihXWoLz3dz-Z_3ttpAEBmVz74FNARXtee20EQl1RhfdIC1O0TAxw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/merge-patch+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"plainPassword\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/users/4",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "del boissons",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjExMzUxMzcsImV4cCI6MTcyMTEzODczNywicm9sZXMiOlsiUk9MRV9CQVJNQU4iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJiYXJtYW4ifQ.JjNNIUQXOBx-RPUcl5AtaUgVayIZLMHcVbYDP8B1pLUB2S3v_xfIm55NYvivkIKBVZD1cupxOQDEZn-IkY1azczjnjk6ChHjMnx7BoKCPtO69_rhBgkJI0cnzPXJfPZgWEzldRkpFWcrKCN1DYRvm26V3HSFa4VesrqF-Ksg9cZyhzIqH6T5RHucJ_ZvK31Oqh11krem4KbGRJ4gj818WArXwdoE7Fzp7vp-GsYY1bgYv4n_pK_a4BEjIEsVDr8dPlaojYjL53Epj5Ifl0zEkpIfXSRVphdfdClWqaV6AlRWYqCcMVtL3i9WrUYfj7K_HApM8_uUJfYDn88sX-2oBg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/boissons/2",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"boissons",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get boissons",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjExMzUxMzcsImV4cCI6MTcyMTEzODczNywicm9sZXMiOlsiUk9MRV9CQVJNQU4iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJiYXJtYW4ifQ.JjNNIUQXOBx-RPUcl5AtaUgVayIZLMHcVbYDP8B1pLUB2S3v_xfIm55NYvivkIKBVZD1cupxOQDEZn-IkY1azczjnjk6ChHjMnx7BoKCPtO69_rhBgkJI0cnzPXJfPZgWEzldRkpFWcrKCN1DYRvm26V3HSFa4VesrqF-Ksg9cZyhzIqH6T5RHucJ_ZvK31Oqh11krem4KbGRJ4gj818WArXwdoE7Fzp7vp-GsYY1bgYv4n_pK_a4BEjIEsVDr8dPlaojYjL53Epj5Ifl0zEkpIfXSRVphdfdClWqaV6AlRWYqCcMVtL3i9WrUYfj7K_HApM8_uUJfYDn88sX-2oBg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/boissons",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"boissons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get boissons détails",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjExMzUxMzcsImV4cCI6MTcyMTEzODczNywicm9sZXMiOlsiUk9MRV9CQVJNQU4iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJiYXJtYW4ifQ.JjNNIUQXOBx-RPUcl5AtaUgVayIZLMHcVbYDP8B1pLUB2S3v_xfIm55NYvivkIKBVZD1cupxOQDEZn-IkY1azczjnjk6ChHjMnx7BoKCPtO69_rhBgkJI0cnzPXJfPZgWEzldRkpFWcrKCN1DYRvm26V3HSFa4VesrqF-Ksg9cZyhzIqH6T5RHucJ_ZvK31Oqh11krem4KbGRJ4gj818WArXwdoE7Fzp7vp-GsYY1bgYv4n_pK_a4BEjIEsVDr8dPlaojYjL53Epj5Ifl0zEkpIfXSRVphdfdClWqaV6AlRWYqCcMVtL3i9WrUYfj7K_HApM8_uUJfYDn88sX-2oBg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/boissons",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"boissons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth barman",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"uuid\": \"barman\",\r\n  \"password\": \"barman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/auth",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "https://localhost:8000/api",
+			"type": "string"
+		}
+	]
+}
