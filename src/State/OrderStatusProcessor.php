@@ -54,6 +54,5 @@ class OrderStatusProcessor implements ProcessorInterface
                 return $this->persistProcessor->process($data, $operation, $uriVariables, $context);;
             }
         }
-        return($role);
     }
 }
