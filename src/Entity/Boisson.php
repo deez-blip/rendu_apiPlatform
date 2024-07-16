@@ -54,7 +54,7 @@ class Boisson
      * @var Collection<int, Commande>
      */
     #[ORM\ManyToMany(targetEntity: Commande::class, mappedBy: 'boissons')]
-    #[Groups(['read', 'write'])]
+//    #[Groups(['read', 'write'])]
     private Collection $commandes;
 
     public function __construct()

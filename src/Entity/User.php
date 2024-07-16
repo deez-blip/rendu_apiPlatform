@@ -22,7 +22,7 @@ use App\State\UserPasswordHasherProcessor;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
-#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'roles' => 'partial'])]
+#[ApiFilter(SearchFilter::class, properties: ['uuid' => 'exact', 'roles' => 'partial'])]
 #[ApiResource(
     operations: [
         new GetCollection(security: "is_granted('ROLE_PATRON')", securityMessage: 'You are not allowed to get users'),
